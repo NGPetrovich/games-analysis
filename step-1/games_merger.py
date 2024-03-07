@@ -1,4 +1,4 @@
-# python games_analysis.py
+# python games_merger.py
 
 import pandas as pd
 import glob
@@ -19,9 +19,13 @@ for file in csv_files:
     df_list.append(df)
 merged_df = pd.concat(df_list, ignore_index=True)
 
-# Create a 'Unique Identifier' based on 'Game ID' and contents within parentheses in 'Game'
+# Created 'Odoo Unique Identifier' based on 'Game ID' and contents within parentheses in 'Game'
+# I called it "Odoo" because I added information about it to ticket in Odoo
+
 merged_df['Game Content'] = merged_df['Game'].str.extract(r'\((.*?)\)')
-# Create a combined key of 'Game ID' and 'Game Content'
+
+# Because of stupid MrSlotty games, had to create a combined key of 'Game ID' and 'Game Content'
+
 merged_df['Combined Key'] = merged_df.apply(lambda x: f"{x['Game ID']}_{x['Game Content']}", axis=1)
 
 # Identify non-unique 'Game Content' within the same 'Game ID'
@@ -33,10 +37,10 @@ merged_df['Odoo Unique Identifier'] = merged_df['Combined Key'].apply(
     lambda x: f"{x}_{list(duplicate_keys).index(x) + 1}" if x in duplicate_keys else x
 )
 
-# Learn about Odoo Unique Identifier from Odoo's Project, where I documented it
+# Learn about "Odoo Unique Identifier" from Odoo's Project, where I documented it
 aggregated_df = merged_df.groupby('Odoo Unique Identifier').agg({
-    'Game': 'first',  # Keep the first instance of 'Game'
-    'Game ID': 'first',  # Keep the first instance of 'Game ID'
+    'Game': 'first',
+    'Game ID': 'first',
     'Unique users': 'sum',
     'Bet count': 'sum',
     'Bet amount': 'sum',
@@ -57,7 +61,6 @@ aggregated_df = merged_df.groupby('Odoo Unique Identifier').agg({
     'Other wins': 'sum'
 }).reset_index()
 
-# Export the aggregated DataFrame to an Excel file
 export_name = "../step-2/games_analysis_merged.xlsx"
 aggregated_df.to_excel(export_name, index=False)
 
