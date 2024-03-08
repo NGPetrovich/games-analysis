@@ -1,0 +1,4 @@
+Game,Game ID,Unique users,Bet count,Bet amount,Win count,Win amount,Count of SideBet bets,Amount of SideBet bets,Count of SideBet wins,Amount of SideBet wins,Count of Jackpot bets,Amount of Jackpot bets,Count of Jackpot wins,Amount of Jackpot wins,Free Round wins,GGR,Launch count,Other bets,Other wins
+Game Provider 3: Roulette Game Type (roulette:oqyhd65tjm3vllya),654684166,5,98,8956,48,7856,0,0,0,0,0,0,0,0,0,1100,98,0,0
+Game Provider 2: Blackjack Game Type (blackjack:oqyhacqbjm3vlgnj),654684167,3,56,5684,69,4869,0,0,0,0,0,0,0,0,0,815,65,0,0
+Game Provider 1: Baccarat Game Type (baccarat:oqyhacqbjm3vlgnj),654684168,1,20,2353,11,1598,0,0,0,0,0,0,0,0,0,755,41,0,0
